@@ -80,3 +80,9 @@ const jobs = [
     status: "All"
   }
 ];
+
+const jobContainer = document.getElementById("jobContainer");
+const totalCount = document.getElementById("totalCount");
+const interviewCount = document.getElementById("interviewCount");
+const rejectedCount = document.getElementById("rejectedCount");
+const jobCountText = document.getElementById("jobCountText");
