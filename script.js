@@ -225,4 +225,16 @@ function setActiveTab(activeId) {
 }
 
 
+document.getElementById("allTab").onclick = () => {
+  setActiveTab("allTab");
+  renderJobs("All");
+};
+
+document.getElementById("interviewTab").onclick = () => {
+  setActiveTab("interviewTab");
+  renderJobs("Interview");
+};
+
+
+
 
