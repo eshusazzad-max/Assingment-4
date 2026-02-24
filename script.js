@@ -86,3 +86,92 @@ const totalCount = document.getElementById("totalCount");
 const interviewCount = document.getElementById("interviewCount");
 const rejectedCount = document.getElementById("rejectedCount");
 const jobCountText = document.getElementById("jobCountText");
+
+
+let currentTab = "All";
+
+function renderJobs(filter = currentTab) {
+
+  currentTab = filter;
+
+  jobContainer.innerHTML = "";
+
+
+  let filteredJobs = jobs.filter(job => {
+    if (currentTab === "All") return true;
+    return job.status === filter;
+  });
+
+  if (filteredJobs.length === 0) {
+    jobContainer.innerHTML = `
+     <div class="bg-base-100 rounded-xl shadow-md 
+                 flex flex-col items-center justify-center 
+                 text-center py-24 min-h-[350px]">
+
+       <img src="./assets/jobs.png" class="w-20 mb-6 opacity-80">
+
+       <h3 class="text-xl font-semibold text-gray-700">
+         No jobs available
+       </h3>
+
+       <p class="text-sm text-gray-500 mt-2">
+         Check back soon for new job opportunities
+       </p>
+
+     </div>
+   `;
+  } else {
+
+    filteredJobs.forEach(job => {
+
+      const card = document.createElement("div");
+      card.className = "card bg-base-100 shadow-md transition duration-300 hover:shadow-xl hover:-translate-y-1";
+
+      card.innerHTML = `
+        <div class="card-body">
+          <div class="flex justify-between items-start">
+            <div>
+              <h2 class="card-title">${job.company}</h2>
+              <p class="text-sm text-gray-500">${job.position}</p>
+              <p class="text-sm mt-2">
+                ${job.location} • ${job.type} • ${job.salary}
+              </p>
+            </div>
+            
+            <button onclick="deleteJob(${job.id})" class="btn btn-ghost btn-sm p-1">
+            <img src="./assets/bin.png" class="w-4 h-4 hover:scale-110 transition">
+            </button>
+          </div>
+
+          <div class="mt-3">
+             <span class="
+               text-xs font-medium px-3 py-1.5 rounded-full
+               ${job.status === "Interview" 
+               ? "bg-green-100 text-green-700"
+               : job.status === "Rejected"
+               ? "bg-red-100 text-red-700"
+               : "bg-blue-100 text-blue-700"}
+               ">
+                ${job.status === "All" ? "NOT APPLIED" : job.status.toUpperCase()}
+             </span>
+          </div>
+          <p class="mt-3 text-sm text-gray-600">${job.description}</p>
+
+          <div class="flex gap-3 mt-4">
+            <button onclick="markInterview(${job.id})" class="btn btn-outline btn-success btn-sm">
+              INTERVIEW
+            </button>
+            <button onclick="markRejected(${job.id})" class="btn btn-outline btn-error btn-sm">
+              REJECTED
+            </button>
+          </div>
+        </div>
+      `;
+
+      jobContainer.appendChild(card);
+
+    });
+  }
+
+  updateDashboard();
+}
