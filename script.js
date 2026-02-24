@@ -175,3 +175,30 @@ function renderJobs(filter = currentTab) {
 
   updateDashboard();
 }
+
+
+
+
+function markInterview(id) {
+  const job = jobs.find(j => j.id === id);
+  job.status = job.status === "Interview" ? "All" : "Interview";
+  renderJobs();
+}
+
+function markRejected(id) {
+  const job = jobs.find(j => j.id === id);
+  job.status = job.status === "Rejected" ? "All" : "Rejected";
+  renderJobs();
+}
+
+
+
+function deleteJob(id) {
+  const index = jobs.findIndex(j => j.id === id);
+  if (index !== -1) {
+  jobs.splice(index, 1);
+ }
+  renderJobs();
+}
+
+
