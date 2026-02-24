@@ -202,3 +202,27 @@ function deleteJob(id) {
 }
 
 
+
+function updateDashboard() {
+  totalCount.textContent = jobs.length;
+  interviewCount.textContent = jobs.filter(j => j.status === "Interview").length;
+  rejectedCount.textContent = jobs.filter(j => j.status === "Rejected").length;
+  jobCountText.textContent = jobs.length + " jobs";
+}
+
+
+const tabButtons = document.querySelectorAll(".tab-btn");
+
+function setActiveTab(activeId) {
+  tabButtons.forEach(btn => {
+    btn.classList.remove("bg-blue-600", "text-white");
+    btn.classList.add("bg-gray-200", "text-gray-600");
+  });
+
+  const activeBtn = document.getElementById(activeId);
+  activeBtn.classList.remove("bg-gray-200", "text-gray-600");
+  activeBtn.classList.add("bg-blue-600", "text-white");
+}
+
+
+
