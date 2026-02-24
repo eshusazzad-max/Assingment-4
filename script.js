@@ -235,6 +235,12 @@ document.getElementById("interviewTab").onclick = () => {
   renderJobs("Interview");
 };
 
+document.getElementById("rejectedTab").onclick = () => {
+  setActiveTab("rejectedTab");
+  renderJobs("Rejected");
+};
+
+renderJobs();
 
 
 
